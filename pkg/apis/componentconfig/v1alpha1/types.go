@@ -55,6 +55,9 @@ type DeschedulerConfiguration struct {
 	// IgnorePVCPods sets whether PVC pods should be allowed to be evicted
 	IgnorePVCPods bool `json:"ignorePvcPods,omitempty"`
 
+	// Tracing is used to setup the required OTEL tracing configuration
+	Tracing TracingConfiguration `json:"tracing,omitempty"`
+
 	// LeaderElection starts Deployment using leader election loop
 	LeaderElection componentbaseconfig.LeaderElectionConfiguration `json:"leaderElection,omitempty"`
 
@@ -65,4 +68,23 @@ type DeschedulerConfiguration struct {
 	// ClientConnection specifies the kubeconfig file and client connection settings to use when communicating with the apiserver.
 	// Refer to [ClientConnection](https://pkg.go.dev/k8s.io/kubernetes/pkg/apis/componentconfig#ClientConnectionConfiguration) for more information.
 	ClientConnection componentbaseconfig.ClientConnectionConfiguration `json:"clientConnection,omitempty"`
+}
+
+// TracingConfiguration contains tracing options.
+type TracingConfiguration struct {
+	// CollectorEndpoint is the address of the OpenTelemetry collector.
+	// If not specified, tracing will be used NoopTraceProvider.
+	CollectorEndpoint string
+	// TransportCert is the path to the certificate file for the OpenTelemetry collector.
+	// If not specified, provider will start in insecure mode.
+	TransportCert string
+	// ServiceName is the name of the service to be used in the OpenTelemetry collector.
+	// If not specified, the default value is "descheduler".
+	ServiceName string
+	// Namespace is the namespace of the service to be used in the OpenTelemetry collector.
+	// If not specified, tracing will be used default namespace.
+	Namespace string
+	// SampleRate is the float value indicating the sampling rate for the traces. Defaults
+	// to 1.0 indicating all 100% of it
+	SampleRate float64
 }

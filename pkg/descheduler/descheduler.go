@@ -47,6 +47,7 @@ import (
 	"sigs.k8s.io/descheduler/pkg/framework"
 	"sigs.k8s.io/descheduler/pkg/framework/pluginregistry"
 	"sigs.k8s.io/descheduler/pkg/framework/plugins/defaultevictor"
+	"sigs.k8s.io/descheduler/pkg/tracing"
 	"sigs.k8s.io/descheduler/pkg/utils"
 )
 
@@ -322,7 +323,9 @@ func RunDeschedulerStrategies(ctx context.Context, rs *options.DeschedulerServer
 			!rs.DisableMetrics,
 			eventRecorder,
 		)
-
+		var parentCloser func()
+		ctx, _, parentCloser = tracing.StartSpan(ctx, "descheduler_parent", "deschedule")
+		defer parentCloser()
 		var enabledDeschedulePlugins []framework.DeschedulePlugin
 		var enabledBalancePlugins []framework.BalancePlugin
 

@@ -110,6 +110,7 @@ func autoConvert_v1alpha1_TracingConfiguration_To_componentconfig_TracingConfigu
 	out.TransportCert = in.TransportCert
 	out.ServiceName = in.ServiceName
 	out.ServiceNamespace = in.ServiceNamespace
+	out.SampleRate = in.SampleRate
 	return nil
 }
 
@@ -123,6 +124,7 @@ func autoConvert_componentconfig_TracingConfiguration_To_v1alpha1_TracingConfigu
 	out.TransportCert = in.TransportCert
 	out.ServiceName = in.ServiceName
 	out.ServiceNamespace = in.ServiceNamespace
+	out.SampleRate = in.SampleRate
 	return nil
 }
 

@@ -106,10 +106,11 @@ func Convert_componentconfig_DeschedulerConfiguration_To_v1alpha1_DeschedulerCon
 }
 
 func autoConvert_v1alpha1_TracingConfiguration_To_componentconfig_TracingConfiguration(in *TracingConfiguration, out *componentconfig.TracingConfiguration, s conversion.Scope) error {
-	out.OtelCollector = in.OtelCollector
-	out.OtelTransportCert = in.OtelTransportCert
-	out.OtelTraceName = in.OtelTraceName
-	out.OtelTraceNamespace = in.OtelTraceNamespace
+	out.CollectorEndpoint = in.CollectorEndpoint
+	out.TransportCert = in.TransportCert
+	out.ServiceName = in.ServiceName
+	out.Namespace = in.Namespace
+	out.SampleRate = in.SampleRate
 	return nil
 }
 
@@ -119,10 +120,11 @@ func Convert_v1alpha1_TracingConfiguration_To_componentconfig_TracingConfigurati
 }
 
 func autoConvert_componentconfig_TracingConfiguration_To_v1alpha1_TracingConfiguration(in *componentconfig.TracingConfiguration, out *TracingConfiguration, s conversion.Scope) error {
-	out.OtelCollector = in.OtelCollector
-	out.OtelTransportCert = in.OtelTransportCert
-	out.OtelTraceName = in.OtelTraceName
-	out.OtelTraceNamespace = in.OtelTraceNamespace
+	out.CollectorEndpoint = in.CollectorEndpoint
+	out.TransportCert = in.TransportCert
+	out.ServiceName = in.ServiceName
+	out.Namespace = in.Namespace
+	out.SampleRate = in.SampleRate
 	return nil
 }
 
